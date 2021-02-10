@@ -1,0 +1,86 @@
+Chapter 13 Copy Control
+
+1. What are the copy control operations?
+   Copy constructor/assignment, destructor, move constructor/assignment
+
+2. Copy constructor
+   2.1 How to define copy constructor?
+   2.2 Synthesized copy constructor
+       * When does the complier define synthesized copy constructor?
+       * What does the synthesized copy constructor do?
+   2.3 Copy initialization
+       * What's the difference between direction initializtion and copy
+         initialization?
+       * What constructors are used for copy initialization?
+       * When does copy initialization happen?
+         Passing parameter of non-refrence type;
+         Return non-reference type;
+         Brace initialize array and aggregate class
+
+3. Copy assignment
+   3.1 How to define copy assignment?
+   3.2 Synthesized copy assignment?
+       * When does the complier define synthesized copy assignment?
+       * What does the synthesized assignment do?
+
+4. Destructor
+   4.1 How is an object destroyed? In what order are the members of a class
+       destroyed?
+   4.2 When a destructor is called?
+   4.3 When does the complier synthesize a destructor?
+
+6. Rvalue reference
+   6.1 What's rvalue reference?
+   6.2 What can be bound to rvalue reference?
+       Functions that return non-reference type; expressions whose values are
+       rvalue; liberals
+   6.3 std::move
+
+7. Move operation
+   7.1 How to define move constructor / assignment?
+   7.2 noexcept
+       * Why should we use noexcept when defining move constructor/assignment?
+       * What a container class will do if we don't specify noexcept for the move
+         constructor?
+   7.3 Synthesized move operation
+       * When does the compiler define synthesized move constructor/assignment?
+       * When does the compiler mark the synthesized move constructor/assignment
+         as deleted?
+       * If the user defines move constructor/assignment, the compiler will mark
+         the synthesized copy constructor/assignment as deleted
+   7.4 When copy/move constructor are used?
+
+8. Others
+   8.1 Default
+       * How to use default?
+       * What are the constraints on using default?
+   8.2 Delete
+       * How to declare a member function is deleted?
+       * When does the complier mark the synthesized copy constructor/assignment
+         and default constructor as deleted?
+   8.3 Move Iterator
+       * What is a move iterator?
+       * How to define/use it?
+   8.4 Reference qualifiers
+       * What is a reference qualifier?
+       * How to use it?
+       * How does it affect function overloading?
+
+& Suggestions
+   ! Destructor shouldn't be deleted
+   ! Rules for designing copy/move assignment: guard against self assignment
+     and exception
+   ! Call the class-specific swap instead of std::swap
+   ! After a move, don't use the value of the moved-from object
+   ! After a move, the moved-from object must be in valid state: it can be
+     safely destroyed or assigned new values; the moved-from object shouldn't
+     point to resource already released
+   ! If move constructor/assignment cannot throw exception, declare them as
+     noexcept
+   ! If a class defines any of the copy control members, it should define all of
+     them
+   ! std::move is a dangerous call. Make sure no user is using the moved-from
+     object when calling std::move
+
+& Tryout
+   ! Construction & destroy of members in a class
